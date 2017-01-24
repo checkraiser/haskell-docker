@@ -1,18 +1,7 @@
-FROM buildpack-deps:latest
-MAINTAINER Truong Dung <checkraiser11@gmail.com>
+FROM checkraiser/haskell-docker
 
-ENV STACK_VERSION 1.3.2
-
-ENV STACK_DOWNLOAD_URL https://github.com/commercialhaskell/stack/releases/download/v$STACK_VERSION/stack-$STACK_VERSION-linux-x86_64.tar.gz
-ENV DEBIAN_FRONTEND noninteractive
-ENV PATH $PATH:/root/.local/bin
-ENV LANG C.UTF-8
-
-RUN apt-get update -q && \
-    apt-get install -qy libgmp-dev && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-RUN mkdir -p /root/.local/bin && \
-    wget -q -O- $STACK_DOWNLOAD_URL | tar --strip=1 -xvz -C /root/.local/bin/ && \
-    chmod +x /root/.local/bin/stack
+RUN stack setup --resolver lts-7.16
+ADD global-stack.yaml ~/.stack/global-project/stack.yaml
+RUN stack setup --resolver lts-7.16
+# Cache some deps
+RUN stack --resolver lts-7.16 build lens-aeson yesod yesod-test esqueleto http-client free classy-prelude-yesod classy-prelude-conduit case-insensitive gravatar wreq xml-conduit warp hspec QuickCheck wai-logger persistent-postgresql HUnit uuid-aeson monad-logger mandrill email-validate yesod-auth yesod-newsfeed yesod-form haskell-src-exts cpphs polyparse xml-hamlet th-orphans either base-compat th-expand-syns th-lift MonadRandom servant-server wai warp

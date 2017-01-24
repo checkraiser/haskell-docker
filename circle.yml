@@ -10,6 +10,6 @@ dependencies:
 
 test:
   pre:
-    - docker build -t checkraiser/haskell-docker .
+    - docker build -t checkraiser/haskell-docker-web .
   override:
-    - docker push checkraiser/haskell-docker
+    - docker push checkraiser/haskell-docker-web
