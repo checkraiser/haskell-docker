@@ -10,6 +10,6 @@ dependencies:
 
 test:
   pre:
-    - docker build -t checkraiser/purescript -f Dockerfile.purescript .
+    - docker build -t checkraiser/haskell-docker-web -f Dockerfile.web .
   override:
-    - docker push checkraiser/purescript
+    - docker push checkraiser/haskell-docker-web
