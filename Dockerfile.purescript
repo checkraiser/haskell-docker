@@ -1,0 +1,3 @@
+FROM biscarch/purescript:0.6.1.1
+
+RUN npm install grunt grunt-cli bower
