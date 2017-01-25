@@ -10,6 +10,6 @@ dependencies:
 
 test:
   pre:
-    - docker build -t checkraiser/purescript -f Dockerfile.purescript
+    - docker build -t checkraiser/purescript -f Dockerfile.purescript .
   override:
     - docker push checkraiser/purescript
